@@ -5,6 +5,7 @@ export const themes = {
     secondary: "#F2F230",
     warn: "#C2F261",
     blue1: "#61F2C2",
+    blue1Light: "#C6FAE9",
     blue2: "#30F2F2",
     header: {
       color: "white",
@@ -18,6 +19,7 @@ export const themes = {
     secondary: "#F2F230",
     warn: "#C2F261",
     blue1: "#61F2C2",
+    blue1Light: "#C6FAE9",
     blue2: "#30F2F2",
     header: {
       color: "white",

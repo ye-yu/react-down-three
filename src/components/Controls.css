@@ -11,3 +11,18 @@
 .controls-div3 { grid-area: 1 / 3 / 2 / 4; }
 .controls-div4 { grid-area: 2 / 1 / 3 / 3; }
 .controls-div5 { grid-area: 2 / 3 / 3 / 4; }
+
+.controls-border-animation {
+  border-width: 1px;
+  border-style: solid;
+  animation: controls-change-border-color 1s ease 0.2s normal;
+}
+
+@keyframes controls-change-border-color {
+  0%{
+    border-color: cyan;
+  }
+  100%{
+    border-color: gray;
+  }
+}

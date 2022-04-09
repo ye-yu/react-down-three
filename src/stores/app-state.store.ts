@@ -22,6 +22,13 @@ export class AppState {
   selectedNumber = 0
   gameResult = GameResult.None
   newRecord = false
+  keyPressAnimationSeed = {
+    Left: Math.random(),
+    Right: Math.random(),
+    Down: Math.random(),
+    Space: Math.random(),
+    Escape: Math.random(),
+  }
 
   constructor() {
     makeAutoObservable(this)
@@ -129,6 +136,13 @@ export class AppState {
     else {
       this.selectedNumber = number / 3
       if (this.selectedNumber === 1) this.win()
+    }
+  }
+
+  rerenderKeyPress(key: keyof AppState["keyPressAnimationSeed"]) {
+    this.keyPressAnimationSeed = {
+      ...this.keyPressAnimationSeed,
+      [key]: Math.random(),
     }
   }
 }

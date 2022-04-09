@@ -27,28 +27,29 @@ function App() {
     if (init) return
     window.getStoreState = () => store
     window.addEventListener("keydown", event => {
-      console.log("Pressed:", {
-        key: event.key,
-        code: event.code,
-      })
       switch(event.code) {
         case "ArrowDown": {
+          appState.rerenderKeyPress("Down")
           if (!appState.gameStarted) return
           return appState.down()
         }
         case "ArrowLeft": {
+          appState.rerenderKeyPress("Left")
           if (!appState.gameStarted) return
           return appState.decrement()
         }
         case "ArrowRight": {
+          appState.rerenderKeyPress("Right")
           if (!appState.gameStarted) return
           return appState.increment()
         }
         case "Space": {
+          appState.rerenderKeyPress("Space")
           if (appState.gameStarted) return
           return appState.startGame()
         }
         case "Escape": {
+          appState.rerenderKeyPress("Escape")
           if (!appState.gameStarted) return
           return appState.lose()
         }
