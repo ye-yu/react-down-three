@@ -8,6 +8,7 @@ import Settings from './components/Settings';
 import TimeLapse from './components/TimeLapse';
 import Stage from './components/Stage';
 import Statistic from './components/Statistic';
+import Controls from './components/Controls';
 
 const { Header, Footer, Content } = Layout;
 
@@ -29,7 +30,7 @@ function App() {
       <Header style={{ textAlign: "center", ...theme.header }}>
         <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
       </Header>
-      <Content>
+      <Content style={{ width: "100%", maxWidth: 800, margin: "auto"}}>
         <Row>
           <Stage />
         </Row>
@@ -38,6 +39,9 @@ function App() {
         </Row>
         <Row>
           <Statistic />
+        </Row>
+        <Row>
+          <Controls />
         </Row>
         <Row style={{marginTop: "2.5rem"}}>
           <Settings />
