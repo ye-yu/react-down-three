@@ -14,47 +14,53 @@ const { Header, Footer, Content } = Layout;
 
 declare global {
   interface Window {
-    getStoreState(): ReturnType<typeof useStores>
+    getStoreState(): ReturnType<typeof useStores> | undefined
+  }
+}
+
+const keyDownListener = (event: KeyboardEvent) => {
+  const store = window.getStoreState()
+  if (!store) return
+  const { appState } = store
+  switch(event.code) {
+    case "ArrowDown": {
+      appState.rerenderKeyPress("Down")
+      if (!appState.gameStarted) return
+      return appState.down()
+    }
+    case "ArrowLeft": {
+      appState.rerenderKeyPress("Left")
+      if (!appState.gameStarted) return
+      return appState.decrement()
+    }
+    case "ArrowRight": {
+      appState.rerenderKeyPress("Right")
+      if (!appState.gameStarted) return
+      return appState.increment()
+    }
+    case "Space": {
+      appState.rerenderKeyPress("Space")
+      if (appState.gameStarted) return
+      return appState.startGame()
+    }
+    case "Escape": {
+      appState.rerenderKeyPress("Escape")
+      if (!appState.gameStarted) return
+      return appState.lose()
+    }
   }
 }
 
 function App() {
   const store = useStores()
-  const { appState, preference } = store
+  const { preference } = store
   const theme = themes[preference.activeTheme]
   const [init, setDoneInit] = React.useState(false)
   React.useEffect(() => {
     if (init) return
     window.getStoreState = () => store
-    window.addEventListener("keydown", event => {
-      switch(event.code) {
-        case "ArrowDown": {
-          appState.rerenderKeyPress("Down")
-          if (!appState.gameStarted) return
-          return appState.down()
-        }
-        case "ArrowLeft": {
-          appState.rerenderKeyPress("Left")
-          if (!appState.gameStarted) return
-          return appState.decrement()
-        }
-        case "ArrowRight": {
-          appState.rerenderKeyPress("Right")
-          if (!appState.gameStarted) return
-          return appState.increment()
-        }
-        case "Space": {
-          appState.rerenderKeyPress("Space")
-          if (appState.gameStarted) return
-          return appState.startGame()
-        }
-        case "Escape": {
-          appState.rerenderKeyPress("Escape")
-          if (!appState.gameStarted) return
-          return appState.lose()
-        }
-      }
-    })
+    window.removeEventListener("keydown", keyDownListener)
+    window.addEventListener("keydown", keyDownListener)
 
     setDoneInit(true)
   }, [init])

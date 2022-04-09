@@ -83,6 +83,7 @@ export class AppState {
       [Difficulty.Expert]: 0,
     }
     this.time = {}
+    this.selectedNumber = 0
   }
 
   setDifficulty(difficulty: typeof this["difficulty"]) {
