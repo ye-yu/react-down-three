@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { AppState } from "./app-state.store";
+import { PreferenceState } from "./preference.store";
 
 const defaultStore = {
-  appState: new AppState()
+  appState: new AppState(),
+  preference: new PreferenceState(),
 }
 
 const StoreContext = React.createContext(defaultStore)
