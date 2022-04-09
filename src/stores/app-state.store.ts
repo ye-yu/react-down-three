@@ -1,24 +1,43 @@
 import { makeAutoObservable } from "mobx";
 import { makePersistable } from 'mobx-persist-store';
 import { Difficulty } from "../constants/difficulty";
+import { GameResult } from "../constants/game-result";
+import { GenerateNumber } from "../helpers/NumberGenerator";
 
 export class AppState {
-  successCount: number = 0
+  successCount = 0
+  gamePlayed = 0
   difficulty: Difficulty = Difficulty.Easy
-  timeLapse: number = 0
-  startTypeLapse: boolean = false
+
+  // non-persistent state
+  timeLapse = 0
+  startTypeLapse = false
+  gameStarted = false
+  selectedNumber = 0
+  gameResult = GameResult.None
 
   constructor() {
     makeAutoObservable(this)
     makePersistable<AppState, keyof AppState>(this, {
       name: "AppState",
-      properties: ["successCount", "difficulty"],
+      properties: ["successCount", "difficulty", "gamePlayed"],
       storage: window.localStorage,
     })
   }
 
   win() {
     this.successCount += 1
+    this.gamePlayed += 1
+    this.gameStarted = false
+    this.gameResult = GameResult.Win
+    this.stopTimeLapse()
+  }
+
+  lose() {
+    this.gamePlayed += 1
+    this.gameStarted = false
+    this.gameResult = GameResult.Lose
+    this.stopTimeLapse()
   }
 
   setDifficulty(difficulty: typeof this["difficulty"]) {
@@ -46,5 +65,31 @@ export class AppState {
 
   stopTimeLapse() {
     this.startTypeLapse = false
+  }
+
+  startGame() {
+    this.selectedNumber = GenerateNumber(this.difficulty)
+    this.gameResult = GameResult.None
+    this.gameStarted = true
+    this.startTimeLapse()
+  }
+
+  decrement() {
+    this.selectedNumber -= 1
+    if (this.selectedNumber < 1) this.lose()
+    else if (this.selectedNumber === 1) this.win()
+  }
+
+  increment() {
+    this.selectedNumber += 1
+  }
+
+  down() {
+    const number = this.selectedNumber
+    if (number % 3 !== 0) this.lose()
+    else {
+      this.selectedNumber = number / 3
+      if (this.selectedNumber === 1) this.win()
+    }
   }
 }
