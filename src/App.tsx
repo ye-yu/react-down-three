@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout } from 'antd';
 import Counter from './components/Counter';
 import './App.css';
@@ -7,17 +8,28 @@ import { themes } from './constants/theme';
 
 const { Header, Footer, Content } = Layout;
 
+declare global {
+  interface Window { 
+    getStoreState(): ReturnType<typeof useStores>
+  }
+}
+
 function App() {
-  const { preference } = useStores()
+  const store = useStores()
+  const { preference } = store
   const theme = themes[preference.activeTheme]
+  React.useEffect(() => {
+    window.getStoreState = () => store
+  })
   return (
     <Layout>
-      <Header style={{ textAlign: "center", ...theme.header }}><span style={{ color: theme.highlight }}>Three</span> to One</Header>
+      <Header style={{ textAlign: "center", ...theme.header }}>
+        <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
+      </Header>
       <Content>
         <Counter />
       </Content>
       <Footer>
-        Footer
       </Footer>
     </Layout>
   );
