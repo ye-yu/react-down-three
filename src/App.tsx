@@ -20,11 +20,43 @@ declare global {
 
 function App() {
   const store = useStores()
-  const { preference } = store
+  const { appState, preference } = store
   const theme = themes[preference.activeTheme]
+  const [init, setDoneInit] = React.useState(false)
   React.useEffect(() => {
+    if (init) return
     window.getStoreState = () => store
-  })
+    window.addEventListener("keydown", event => {
+      console.log("Pressed:", {
+        key: event.key,
+        code: event.code,
+      })
+      switch(event.code) {
+        case "ArrowDown": {
+          if (!appState.gameStarted) return
+          return appState.down()
+        }
+        case "ArrowLeft": {
+          if (!appState.gameStarted) return
+          return appState.decrement()
+        }
+        case "ArrowRight": {
+          if (!appState.gameStarted) return
+          return appState.increment()
+        }
+        case "Space": {
+          if (appState.gameStarted) return
+          return appState.startGame()
+        }
+        case "Escape": {
+          if (!appState.gameStarted) return
+          return appState.lose()
+        }
+      }
+    })
+
+    setDoneInit(true)
+  }, [init])
   return (
     <Layout>
       <Header style={{ textAlign: "center", ...theme.header }}>
