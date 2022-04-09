@@ -1,10 +1,11 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Row } from 'antd';
 import Counter from './components/Counter';
 import './App.css';
 import 'antd/dist/antd.min.css';
 import { useStores } from './stores';
 import { themes } from './constants/theme';
+import Settings from './components/Settings';
 
 const { Header, Footer, Content } = Layout;
 
@@ -27,7 +28,12 @@ function App() {
         <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
       </Header>
       <Content>
-        <Counter />
+        <Row>
+          <Counter />
+        </Row>
+        <Row>
+          <Settings />
+        </Row>
       </Content>
       <Footer>
       </Footer>
