@@ -8,6 +8,12 @@ export class AppState {
   successCount = 0
   gamePlayed = 0
   difficulty: Difficulty = Difficulty.Easy
+  record: {[difficulty: number]: number} = {
+    [Difficulty.Easy]: 0,
+    [Difficulty.Intermediate]: 0,
+    [Difficulty.Expert]: 0,
+  }
+  time: {[difficulty: number]: number | undefined} = {}
 
   // non-persistent state
   timeLapse = 0
@@ -20,7 +26,13 @@ export class AppState {
     makeAutoObservable(this)
     makePersistable<AppState, keyof AppState>(this, {
       name: "AppState",
-      properties: ["successCount", "difficulty", "gamePlayed"],
+      properties: [
+        "successCount",
+        "difficulty",
+        "gamePlayed",
+        "record",
+        "time",
+      ],
       storage: window.localStorage,
     })
   }
@@ -38,6 +50,20 @@ export class AppState {
     this.gameStarted = false
     this.gameResult = GameResult.Lose
     this.stopTimeLapse()
+  }
+
+  reset() {
+    this.successCount = 0
+    this.gamePlayed = 0
+    this.gameStarted = false
+    this.gameResult = GameResult.None
+    this.timeLapse = 0
+    this.record = {
+      [Difficulty.Easy]: 0,
+      [Difficulty.Intermediate]: 0,
+      [Difficulty.Expert]: 0,
+    }
+    this.time = {}
   }
 
   setDifficulty(difficulty: typeof this["difficulty"]) {

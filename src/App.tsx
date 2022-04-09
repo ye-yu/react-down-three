@@ -1,6 +1,5 @@
 import React from 'react';
 import { Layout, Row } from 'antd';
-import Counter from './components/Counter';
 import './App.css';
 import 'antd/dist/antd.min.css';
 import { useStores } from './stores';
@@ -8,11 +7,12 @@ import { themes } from './constants/theme';
 import Settings from './components/Settings';
 import TimeLapse from './components/TimeLapse';
 import Stage from './components/Stage';
+import Statistic from './components/Statistic';
 
 const { Header, Footer, Content } = Layout;
 
 declare global {
-  interface Window { 
+  interface Window {
     getStoreState(): ReturnType<typeof useStores>
   }
 }
@@ -35,6 +35,9 @@ function App() {
         </Row>
         <Row>
           <TimeLapse />
+        </Row>
+        <Row>
+          <Statistic />
         </Row>
         <Row>
           <Settings />
