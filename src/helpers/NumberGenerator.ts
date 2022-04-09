@@ -5,8 +5,8 @@ export function GenerateNumber(difficulty = Difficulty.Easy) {
     case Difficulty.Easy:
       return ~~(Math.random() * 100)
     case Difficulty.Intermediate:
-      return ~~(Math.random() * 10000)
+      return ~~(Math.random() * 10000) + 100
     case Difficulty.Expert:
-      return ~~(Math.random() * 1000000)
+      return ~~(Math.random() * 1000000) + 10000
   }
 }

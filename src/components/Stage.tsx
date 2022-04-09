@@ -24,7 +24,7 @@ function Stage() {
       <Content>
         <Divider style={{fontSize: "1.3rem"}}>{getGameTitle()}</Divider>
         <Row justify="center">
-          <Text style={{fontSize: "4rem"}}>{appState.selectedNumber}</Text>
+          <Text style={{fontSize: "4rem", color: appState.gameResult === GameResult.Lose ? "maroon" : "inherit"}}>{appState.selectedNumber}</Text>
         </Row>
       </Content>
     </Layout>
