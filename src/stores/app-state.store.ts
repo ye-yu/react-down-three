@@ -8,7 +8,8 @@ export class AppState {
     makeAutoObservable(this)
     makePersistable<AppState, keyof AppState>(this, {
       name: "AppState",
-      properties: ["successCount"]
+      properties: ["successCount"],
+      storage: window.localStorage,
     })
   }
 

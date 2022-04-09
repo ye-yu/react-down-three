@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode, ReactPropTypes } from "react";
+import React, { useContext } from "react";
 import { AppState } from "./app-state.store";
 
 const defaultStore = {
@@ -8,7 +8,8 @@ const defaultStore = {
 const StoreContext = React.createContext(defaultStore)
 
 export function useStores() {
-  
+  const store = useContext(StoreContext)
+  return store
 }
 
 export function ContextProvider(props: Omit<React.ComponentProps<typeof StoreContext["Provider"]>, "value">) {
