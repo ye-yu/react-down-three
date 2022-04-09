@@ -29,14 +29,19 @@ export class AppState {
     this.timeLapse = 0
     this.startTypeLapse = true
     this.updateTimeLapse(0)
+    let startTime = performance.now()
+    const self = this
+    const callBack = (ms: number) => {
+      if (!self.startTypeLapse) return
+      self.updateTimeLapse(ms - startTime)
+      startTime = ms
+      requestAnimationFrame(callBack)
+    }
+    requestAnimationFrame(callBack)
   }
 
   updateTimeLapse(time: typeof this["timeLapse"]) {
     this.timeLapse += time
-    const self = this
-    requestAnimationFrame(ms => {
-      if (self.startTypeLapse) self.updateTimeLapse(ms)
-    })
   }
 
   stopTimeLapse() {

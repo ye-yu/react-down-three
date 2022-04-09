@@ -6,6 +6,7 @@ import 'antd/dist/antd.min.css';
 import { useStores } from './stores';
 import { themes } from './constants/theme';
 import Settings from './components/Settings';
+import TimeLapse from './components/TimeLapse';
 
 const { Header, Footer, Content } = Layout;
 
@@ -30,6 +31,9 @@ function App() {
       <Content>
         <Row>
           <Counter />
+        </Row>
+        <Row>
+          <TimeLapse />
         </Row>
         <Row>
           <Settings />
