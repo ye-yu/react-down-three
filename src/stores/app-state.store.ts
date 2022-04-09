@@ -21,6 +21,7 @@ export class AppState {
   gameStarted = false
   selectedNumber = 0
   gameResult = GameResult.None
+  newRecord = false
 
   constructor() {
     makeAutoObservable(this)
@@ -42,7 +43,18 @@ export class AppState {
     this.gamePlayed += 1
     this.gameStarted = false
     this.gameResult = GameResult.Win
+    this.record = {
+      ...this.record,
+      [this.difficulty]: this.record[this.difficulty] + 1
+    }
     this.stopTimeLapse()
+    if (this.timeLapse < (this.time[this.difficulty] ?? +Infinity)) {
+      this.newRecord = true
+      this.time = {
+        ...this.time,
+        [this.difficulty]: this.timeLapse,
+      }
+    }
   }
 
   lose() {
@@ -97,6 +109,7 @@ export class AppState {
     this.selectedNumber = GenerateNumber(this.difficulty)
     this.gameResult = GameResult.None
     this.gameStarted = true
+    this.newRecord = false
     this.startTimeLapse()
   }
 

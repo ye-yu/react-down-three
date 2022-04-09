@@ -10,6 +10,7 @@ function Stage() {
   const { appState } = useStores()
 
   const getGameTitle = () => {
+    if (appState.newRecord) return "New Record!"
     if (appState.gameStarted) return "Three to One!"
     switch(appState.gameResult) {
       case GameResult.None: return "Start Game"

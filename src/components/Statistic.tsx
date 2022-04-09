@@ -12,17 +12,17 @@ function showStatistic(appState: AppState) {
     {
       key: "Easy",
       Wins: appState.record[Difficulty.Easy],
-      Time: appState.time[Difficulty.Easy],
+      Time: appState.time[Difficulty.Easy] ? `${(appState.time[Difficulty.Easy]! / 1000).toFixed(2)} s` : "",
     },
     {
       key: "Intermediate",
       Wins: appState.record[Difficulty.Intermediate],
-      Time: appState.time[Difficulty.Intermediate],
+      Time: appState.time[Difficulty.Intermediate] ? `${(appState.time[Difficulty.Intermediate]! / 1000).toFixed(2)} s` : "",
     },
     {
       key: "Expert",
       Wins: appState.record[Difficulty.Expert],
-      Time: appState.time[Difficulty.Expert],
+      Time: appState.time[Difficulty.Expert] ? `${(appState.time[Difficulty.Expert]! / 1000).toFixed(2)} s` : "",
     },
   ]
   const columns = [

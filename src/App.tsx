@@ -39,7 +39,7 @@ function App() {
         <Row>
           <Statistic />
         </Row>
-        <Row>
+        <Row style={{marginTop: "2.5rem"}}>
           <Settings />
         </Row>
       </Content>
