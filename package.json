@@ -23,6 +23,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run deploy:prepare && npm run deploy:push",
+    "deploy:prepare": "rm -rf docs && npm run build && mv build docs",
+    "deploy:push": "git add . && git commit -m \"Update build\" && git push",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -43,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "react-down-three"
 }

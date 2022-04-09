@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-down-three/static/css/main.008c5459.css",
+    "main.js": "/react-down-three/static/js/main.b7e38e1a.js",
+    "static/js/787.48dfd3ea.chunk.js": "/react-down-three/static/js/787.48dfd3ea.chunk.js",
+    "index.html": "/react-down-three/index.html",
+    "main.008c5459.css.map": "/react-down-three/static/css/main.008c5459.css.map",
+    "main.b7e38e1a.js.map": "/react-down-three/static/js/main.b7e38e1a.js.map",
+    "787.48dfd3ea.chunk.js.map": "/react-down-three/static/js/787.48dfd3ea.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.008c5459.css",
+    "static/js/main.b7e38e1a.js"
+  ]
+}
