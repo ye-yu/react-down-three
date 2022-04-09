@@ -27,6 +27,11 @@ function showStatistic(appState: AppState) {
   ]
   const columns = [
     {
+      title: "Mode",
+      dataIndex: "key",
+      key: "key"
+    },
+    {
       title: "Wins",
       dataIndex: "Wins",
       key: "key"
