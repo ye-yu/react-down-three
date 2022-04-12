@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row } from 'antd';
+import { Button, Layout, Modal, Row } from 'antd';
 import './App.css';
 import 'antd/dist/antd.min.css';
 import { useStores } from './stores';
@@ -9,6 +9,7 @@ import TimeLapse from './components/TimeLapse';
 import Stage from './components/Stage';
 import Statistic from './components/Statistic';
 import Controls from './components/Controls';
+import { GithubOutlined } from '@ant-design/icons';
 
 const { Header, Footer, Content } = Layout;
 
@@ -22,7 +23,7 @@ const keyDownListener = (event: KeyboardEvent) => {
   const store = window.getStoreState()
   if (!store) return
   const { appState } = store
-  switch(event.code) {
+  switch (event.code) {
     case "ArrowDown": {
       appState.rerenderKeyPress("Down")
       if (!appState.gameStarted) return
@@ -51,6 +52,12 @@ const keyDownListener = (event: KeyboardEvent) => {
   }
 }
 
+function showGuide() {
+  Modal.info({
+
+  })
+}
+
 function App() {
   const store = useStores()
   const { preference } = store
@@ -66,10 +73,18 @@ function App() {
   }, [init])
   return (
     <Layout>
-      <Header style={{ textAlign: "center", ...theme.header }}>
-        <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
+      <Header style={theme.header.title}>
+        <span style={{display: "inline-block", transform: "translateY(10px)"}}>
+          <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
+        </span>
       </Header>
-      <Content style={{ width: "100%", maxWidth: 800, margin: "auto"}}>
+      <Header>
+        <div style={{textAlign: "center"}}>
+          <Button style={{margin: "0 10px"}} onClick={() => showGuide()}>How to Play</Button>
+          <Button style={{margin: "0 10px"}} icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
+        </div>
+      </Header>
+      <Content style={{ width: "100%", maxWidth: 800, margin: "auto" }}>
         <Row>
           <Stage />
         </Row>
@@ -82,7 +97,7 @@ function App() {
         <Row>
           <Controls />
         </Row>
-        <Row style={{marginTop: "2.5rem"}}>
+        <Row style={{ marginTop: "2.5rem" }}>
           <Settings />
         </Row>
       </Content>

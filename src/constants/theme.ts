@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export const themes = {
   dark: {
     color: "white",
@@ -8,9 +10,14 @@ export const themes = {
     blue1Light: "#C6FAE9",
     blue2: "#30F2F2",
     header: {
-      color: "white",
-      fontWeight: "bold",
-      fontSize: "2.5rem",
+      title: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "2.5rem",
+        textAlign: "center",
+      } as CSSProperties,
+      layout: {
+      },
     },
   },
   light: {
@@ -22,9 +29,14 @@ export const themes = {
     blue1Light: "#C6FAE9",
     blue2: "#30F2F2",
     header: {
-      color: "white",
-      fontWeight: "bold",
-      fontSize: "2.5rem",
+      title: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "2.5rem",
+        textAlign: "center",
+      } as CSSProperties,
+      layout: {
+      },
     },
   }
 }
