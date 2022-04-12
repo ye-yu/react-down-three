@@ -20,7 +20,7 @@ function Stage() {
   }
 
   return (
-    <Layout style={{padding: "0 1rem"}}>
+    <Layout style={{padding: "1rem 1rem 0"}}>
       <Content>
         <Divider style={{fontSize: "1.3rem"}}>{getGameTitle()}</Divider>
         <Row justify="center">

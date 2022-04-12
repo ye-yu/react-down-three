@@ -196,12 +196,19 @@ function App() {
           <Col>
             <Button onClick={() => showGuide()}>How to Play</Button>
           </Col>
-          <Col>
-            <Button icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
-          </Col>
+          {
+            bp.sm && <Col>
+              <Button icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
+            </Col>
+          }
+          {
+            !bp.sm && <Col>
+              <Button icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")} />
+            </Col>
+          }
         </Row>
       </Header>
-      <Content style={{ width: "100%", maxWidth: 900, margin: "auto", marginTop: "1rem" }}>
+      <Content style={{ width: "95%", maxWidth: 900, margin: "auto", marginTop: "1rem" }}>
         <Row>
           <Stage />
         </Row>
