@@ -1,4 +1,4 @@
-import { Layout, Row, Typography, Modal, Button, Table } from "antd";
+import { Layout, Row, Typography, Modal, Button, Table, Col } from "antd";
 import { observer } from "mobx-react";
 import { useStores } from "../stores";
 import { AppState } from "../stores/app-state.store";
@@ -42,7 +42,7 @@ function showStatistic(appState: AppState) {
       key: "key"
     },
   ]
-  
+
   const modal = Modal.info({
     title: 'Game Statistic',
     content: <>
@@ -65,12 +65,18 @@ function showStatistic(appState: AppState) {
 function Statistic() {
   const { appState } = useStores()
   return (
-    <Layout style={{padding: "0 1rem"}}>
+    <Layout style={{ padding: "0 1rem" }}>
       <Content>
-        <Row justify="space-around" style={{ paddingTop: "1rem", paddingBottom: "1rem" }} align="middle">
-          <Text type="secondary">Total Success: {appState.successCount}</Text>
-          <Text type="secondary">Games Played: {appState.gamePlayed}</Text>
-          <Button onClick={() => showStatistic(appState)}>Show Statistic</Button>
+        <Row justify="center" style={{ paddingTop: "1rem", paddingBottom: "1rem" }} align="middle" gutter={[20, 20]}>
+          <Col style={{textAlign: "center"}} sm={8} span={12}>
+            <Text type="secondary">Total Success: {appState.successCount}</Text>
+          </Col>
+          <Col style={{textAlign: "center"}} sm={8} span={12}>
+            <Text type="secondary">Games Played: {appState.gamePlayed}</Text>
+          </Col>
+          <Col style={{textAlign: "center"}} sm={8} span={24}>
+            <Button onClick={() => showStatistic(appState)}>Show Statistic</Button>
+          </Col>
         </Row>
       </Content>
     </Layout>
