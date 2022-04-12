@@ -10,6 +10,8 @@ import Stage from './components/Stage';
 import Statistic from './components/Statistic';
 import Controls from './components/Controls';
 import { GithubOutlined } from '@ant-design/icons';
+import { GenerateNumber } from './helpers/NumberGenerator';
+import { Difficulty } from './constants/difficulty';
 
 const { Header, Footer, Content } = Layout;
 
@@ -53,9 +55,93 @@ const keyDownListener = (event: KeyboardEvent) => {
 }
 
 function showGuide() {
-  Modal.info({
+  const transitionDuration = 2000
+  let number = GenerateNumber(Difficulty.Easy)
 
+  const getTutorialMessage = () => {
+    if (number === 1) return "The game ends if the final number is a 1. Do it as fast as you can!"
+    const remainder = number % 3
+    switch(remainder) {
+      case 0: return "Yes, start divide by three!"
+      case 1: return "No, but it will be if you minus 1!"
+      case 2: return "No, but it will be if you add 1!"
+    }
+  }
+
+  const getTutorialAction = () => {
+    if (number === 1) return ""
+    const remainder = number % 3
+    switch(remainder) {
+      case 0: return <>&divide; 3 = {number / 3}</>
+      case 1: return <>- 1 = {number - 1}</>
+      case 2: return <>+ 1 = {number + 1}</>
+    }
+  }
+
+  const getModalContent = (fadeIn = false) => <Content>
+    <Row>
+      Is your number divisible by <span style={{ fontWeight: "bold", paddingLeft: 5 }}>three</span>?
+    </Row>
+    <Row>
+      <h1>{number}</h1>
+      <h1 style={fadeIn ? {
+        paddingLeft: 10,
+        color: "maroon",
+        transition: "color ease 500ms",
+        transitionDelay: "500ms",
+      } : {
+        paddingLeft: 10,
+        color: "white",
+      }}>{getTutorialAction()}</h1>
+    </Row>
+    <Row style={fadeIn ? {
+        color: "inherit",
+        transition: "color ease 500ms",
+        transitionDelay: "500ms",
+      } : {
+        color: number === 1 ? "inherit" : "white",
+      }}>
+      { getTutorialMessage() }
+    </Row>
+  </Content>
+  const modal = Modal.info({
+    title: <h2>How to Play</h2>,
+    content: getModalContent()
   })
+
+  setTimeout(() => {
+    modal.update({
+      content: getModalContent(true)
+    })
+
+    setTimeout(() => {
+      startAnimation()
+    }, transitionDuration)
+  }, 500)
+
+  const startAnimation = () => {
+    if (number === 1) return
+    const remainder = number % 3
+    switch(remainder) {
+      case 0: number = number / 3; break;
+      case 1: number = number - 1; break;
+      case 2: number = number + 1; break;
+    }
+
+    modal.update({
+      content: getModalContent()
+    })
+
+    setTimeout(() => {
+      modal.update({
+        content: getModalContent(true)
+      })
+  
+      setTimeout(() => {
+        startAnimation()
+      }, transitionDuration)
+    }, 500)
+  }
 }
 
 function App() {
@@ -74,14 +160,14 @@ function App() {
   return (
     <Layout>
       <Header style={theme.header.title}>
-        <span style={{display: "inline-block", transform: "translateY(10px)"}}>
+        <span style={{ display: "inline-block", transform: "translateY(10px)" }}>
           <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
         </span>
       </Header>
       <Header>
-        <div style={{textAlign: "center"}}>
-          <Button style={{margin: "0 10px"}} onClick={() => showGuide()}>How to Play</Button>
-          <Button style={{margin: "0 10px"}} icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button style={{ margin: "0 10px" }} onClick={() => showGuide()}>How to Play</Button>
+          <Button style={{ margin: "0 10px" }} icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
         </div>
       </Header>
       <Content style={{ width: "100%", maxWidth: 800, margin: "auto" }}>
