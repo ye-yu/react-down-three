@@ -48,17 +48,18 @@ function showStatistic(appState: AppState) {
     content: <>
       <Table dataSource={tableData} columns={columns} />
       <Button onClick={() => deleteGameStatisticUpdate()}>Reset Statistic</Button>
-
     </>,
     onOk() { },
     cancelText: "Reset Statistic"
   });
 
   const deleteGameStatisticUpdate = () => modal.update({
-    content: "Delete game statistic?",
-    onOk() {
-      appState.reset()
-    }
+    content: <Content>
+      Delete game statistic?
+      <Button style={{marginLeft: 10}} onClick={() => appState.reset()}>Reset Statistic</Button>
+    </Content>,
+    onOk() { },
+    okText: "Back",
   })
 }
 
