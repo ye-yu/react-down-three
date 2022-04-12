@@ -67,11 +67,9 @@ function Statistic() {
   return (
     <Layout>
       <Content>
-        <Row justify="space-around" style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
-          <Text type="secondary">Success: {appState.successCount}</Text>
-          <Text type="secondary">Games: {appState.gamePlayed}</Text>
-        </Row>
-        <Row justify="center">
+        <Row justify="space-around" style={{ paddingTop: "1rem", paddingBottom: "1rem" }} align="middle">
+          <Text type="secondary">Total Success: {appState.successCount}</Text>
+          <Text type="secondary">Games Played: {appState.gamePlayed}</Text>
           <Button onClick={() => showStatistic(appState)}>Show Statistic</Button>
         </Row>
       </Content>
