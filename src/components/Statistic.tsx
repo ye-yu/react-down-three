@@ -65,7 +65,7 @@ function showStatistic(appState: AppState) {
 function Statistic() {
   const { appState } = useStores()
   return (
-    <Layout>
+    <Layout style={{padding: "0 1rem"}}>
       <Content>
         <Row justify="space-around" style={{ paddingTop: "1rem", paddingBottom: "1rem" }} align="middle">
           <Text type="secondary">Total Success: {appState.successCount}</Text>

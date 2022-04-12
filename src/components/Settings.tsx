@@ -7,7 +7,7 @@ import { Difficulty } from "../constants/difficulty";
 
 function Settings() {
   const { appState } = useStores()
-  return <Layout>
+  return <Layout style={{padding: "0 1rem 3rem 1rem"}}>
     <Divider orientation="center">Settings</Divider>
     <Row justify="space-around">
       <Button onClick={() => appState.setDifficulty(Difficulty.Easy)} autoFocus={false} type={appState.difficulty === Difficulty.Easy ? "primary" : "default"} style={{margin: "auto"}}>Easy</Button>

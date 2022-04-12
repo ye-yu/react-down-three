@@ -15,6 +15,7 @@ export const themes = {
         fontWeight: "bold",
         fontSize: "2.5rem",
         textAlign: "center",
+        background: "#333366FE",
       } as CSSProperties,
       layout: {
       },
@@ -34,6 +35,7 @@ export const themes = {
         fontWeight: "bold",
         fontSize: "2.5rem",
         textAlign: "center",
+        background: "#333366FE",
       } as CSSProperties,
       layout: {
       },

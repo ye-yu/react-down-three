@@ -43,7 +43,7 @@ function Controls() {
   const { appState } = useStores()
   const bp = useBreakpoint()
   return (
-    <Layout>
+    <Layout style={{padding: "0 1rem"}}>
       <Content>
         <Divider>Controls</Divider>
         {

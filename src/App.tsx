@@ -12,6 +12,7 @@ import Controls from './components/Controls';
 import { GithubOutlined } from '@ant-design/icons';
 import { GenerateNumber } from './helpers/NumberGenerator';
 import { Difficulty } from './constants/difficulty';
+import BGIMG from './assets/bg.jpg';
 
 const { Header, Footer, Content } = Layout;
 
@@ -158,19 +159,26 @@ function App() {
     setDoneInit(true)
   }, [init])
   return (
-    <Layout>
+    <Layout style={{
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundImage: `url(${BGIMG})`,
+      minHeight: "100vh",
+      height: "100%",
+    }}>
       <Header style={theme.header.title}>
         <span style={{ display: "inline-block", transform: "translateY(10px)" }}>
           <span style={{ color: theme.highlight }}>Three</span> to <span style={{ color: theme.blue1 }}>One</span>
         </span>
       </Header>
-      <Header>
+      <Header style={{background: theme.header.title.background}}>
         <div style={{ textAlign: "center" }}>
           <Button style={{ margin: "0 10px" }} onClick={() => showGuide()}>How to Play</Button>
           <Button style={{ margin: "0 10px" }} icon={<GithubOutlined />} onClick={() => window.open("https://github.com/ye-yu/react-down-three", "_blank")}>Source</Button>
         </div>
       </Header>
-      <Content style={{ width: "100%", maxWidth: 800, margin: "auto" }}>
+      <Content style={{ width: "100%", maxWidth: 900, margin: "auto", marginTop: "1rem" }}>
         <Row>
           <Stage />
         </Row>
@@ -183,12 +191,10 @@ function App() {
         <Row>
           <Controls />
         </Row>
-        <Row style={{ marginTop: "2.5rem" }}>
+        <Row>
           <Settings />
         </Row>
       </Content>
-      <Footer>
-      </Footer>
     </Layout>
   );
 }
