@@ -56,7 +56,10 @@ function showStatistic(appState: AppState) {
   const deleteGameStatisticUpdate = () => modal.update({
     content: <Content>
       Delete game statistic?
-      <Button style={{marginLeft: 10}} onClick={() => appState.reset()}>Reset Statistic</Button>
+      <Button style={{marginLeft: 10}} onClick={() => {
+        appState.reset()
+        modal.destroy()
+      }}>Reset Statistic</Button>
     </Content>,
     onOk() { },
     okText: "Back",
